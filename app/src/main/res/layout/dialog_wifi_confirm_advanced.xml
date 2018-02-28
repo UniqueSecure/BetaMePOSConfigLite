@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/imageDialogLayout"
+    android:layout_width="@dimen/dialog_with"
+    android:layout_height="@dimen/dialog_height"
+    android:gravity="center_vertical|center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textCheckMePOSdialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/dialog_advanced_wifi"
+        android:textSize="@dimen/text_size20" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/space20" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="right"
+        android:paddingRight="@dimen/space35">
+
+        <Button
+            android:id="@+id/btnContinue"
+            android:layout_width="@dimen/button_width100"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_border"
+            android:backgroundTint="@android:color/white"
+            android:text="@string/continue_btn"
+            android:textAllCaps="true"
+            android:textColor="@color/colorCosmeticBlue"
+            android:textSize="@dimen/text_size20"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="@dimen/button_width100"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_border"
+            android:backgroundTint="@android:color/white"
+            android:text="@string/cancel_btn"
+            android:textAllCaps="true"
+            android:textColor="@color/colorCosmeticBlue"
+            android:textSize="@dimen/text_size20"
+            android:visibility="visible" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,65 @@
+<resources>
+    <string name="app_name">MePOS Config Lite</string>
+    <string name="next">next</string>
+    <string name="connect">connect</string>
+    <string name="hello">Welcome\nto MePOS</string>
+    <string name="mepos_found_lbl">Tap connect to continue</string>
+    <string name="fmepos_not_found_lbl">Let\'s find your hardware press NEXT\nto continue</string>
+    <string name="continue_btn">continue</string>
+    <string name="cancel_btn">cancel</string>
+    <string name="dialog_advanced_wifi">Only change these options if you have previous\nexperience on network configuration.</string>
+    <string name="field_required">The field is required!</string>
+    <string name="not_aviliable">N/A</string>
+    <string name="wifi_client_config_problem">It appears the Wifi client connection was not established. Please Check your encryption modes and password.</string>
+    <string name="it_will_take_a_minute">It will take about one minute to configure, please wait.</string>
+    <string name="netmasklbl">Netmask</string>
+    <string name="wifiCompleted">Configuration\ncompleted</string>
+    <string name="txtCompleted">Your MePOS has successfully joined your WiFi,\nyou can find it at the following IP address:</string>
+    <string name="checkPower">Check the MePOS power</string>
+    <string name="reconectMePOS">Please try to reconnect MePOS</string>
+    <string name="cyclepowerMePOS">Please cycle power the MePOS by\ndisconnecting it from the power source.</string>
+    <string name="contactSupportTeam">Contact the support team</string>
+    <string name="contact">contact</string>
+    <string name="meposConfiguration">Would you like to run\nthe MePOS configuration?</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+
+
+
+    <string name="tap_to_connect">Tap to connect to continue</string>
+    <string name="mepos_connected">MePOS connected</string>
+    <string name="mepos_disconnected">MePOS disconnected</string>
+    <string name="usb">USB</string>
+    <string name="configure_your">Let\'s configure your</string>
+    <string name="wifi">WiFi</string>
+    <string name="go">go</string>
+    <string name="back">back</string>
+    <string name="retry">retry</string>
+    <string name="finding_your_mepos">Finding your MePOS now,\nplease wait...</string>
+    <string name="progress_circle">progress circle</string>
+    <string name="dialog_check_mepos_text">Check if the MePOS\nis connected to the main power,\nplease retry once connected</string>
+    <string name="dialog_cdisconect_reconect">Please disconnect and reconnect\nthe tablet and tap NEXT to continue</string>
+    <string name="dialog_ccontact_support">Please contact the MePOS\nteam support</string>
+    <string name="wifi_client_title">Tell us about\nyour WiFi network</string>
+    <string name="ssid">Your WiFi name</string>
+    <string name="hintpassword">Your WiFi password</string>
+    <string name="encryption">Encryption</string>
+    <string name="ip_automatic_dhcp">IP (Automatic DHCP)</string>
+    <string name="netmask">255.255.255.0</string>
+    <string name="dhcplbl">Ip type</string>
+    <string name="dhcp">DHCP</string>
+    <string name="automatic">Automatic</string>
+    <string name="advacedswitchtxt">Advanced configuration</string>
+
+    <string-array name="encryptions">
+        <item>NONE</item>
+        <item>WEP_OPEN</item>
+        <item>WEP</item>
+        <item>WPA_TKIP</item>
+        <item>WPA_AES</item>
+        <item>WPA2_TKIP</item>
+        <item>WPA2_AES</item>
+        <item>WPAWPA2_TKIP</item>
+        <item>WPAWPA2_AES</item>
+    </string-array>
+</resources>

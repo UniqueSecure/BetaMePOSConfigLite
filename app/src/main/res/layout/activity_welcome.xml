@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/meposconfig8"
+    android:gravity="center_vertical|center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/lblHello"
+        style="@style/setUpTitlesWhite"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:textSize="@dimen/text_size60"
+        android:text="@string/hello"/>
+
+    <TextView
+        android:id="@+id/lblSubTitle"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size20"
+        android:text="@string/tap_to_connect"/>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/space20" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_circle"
+            android:layout_centerInParent="true"
+            android:layout_width="350dp"
+            android:layout_height="350dp"
+            android:src="@drawable/ic_spininng_circle" />
+
+        <Button
+            android:id="@+id/btnconnect"
+            android:layout_centerInParent="true"
+            android:layout_width="135dp"
+            android:layout_height="135dp"
+            android:background="@drawable/ic_brightness_1_black_24dp"
+            android:text="@string/connect"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_size20" />
+
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>
