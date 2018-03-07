@@ -17,7 +17,7 @@ import com.unique_secure.meposconfiglite.R;
 public class Dialogs extends MePOSAbstractActivity {
 
     public interface OnDialogCompleted {
-        void onComplete(Boolean success);
+        void onCompleteDialogs(Boolean success);
     }
 
     Context context;
@@ -26,21 +26,19 @@ public class Dialogs extends MePOSAbstractActivity {
             contactSupportDialog,
             wifiConfirmAdvancedDialog,
             notNullFieldsDialog,
-            retryCommonDialog,
-            finalDialog;
+            retryCommonDialog;
     OnDialogCompleted completed;
-
 
     public Dialogs(Context context, OnDialogCompleted callback) {
         this.context = context;
         this.completed = callback;
     }
 
-    public Dialogs(Context context){
+    public Dialogs(Context context) {
         this.context = context;
     }
 
-    public void CheckTheMePOSDialog() {
+    public void CheckTheMePOSDialog(final boolean attempts) {
         checkMePOSDialog = new Dialog(context);
         checkMePOSDialog.setContentView(R.layout.dialog_check_the_mepos);
         TextView mTextCheckMePOSdialog = checkMePOSDialog.findViewById(R.id.textCheckMePOSdialog);
@@ -51,13 +49,14 @@ public class Dialogs extends MePOSAbstractActivity {
         mBtnGo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                completed.onCompleteDialogs(attempts);
                 checkMePOSDialog.dismiss();
             }
         });
         checkMePOSDialog.show();
     }
 
-    public void DisconectConectTablet() {
+    public void DisconectConectTablet(final boolean attempts) {
         disconnectReconnectDialog = new Dialog(context);
         disconnectReconnectDialog.setContentView(R.layout.dialog_disconect_reconect);
         TextView mTextCheckMePOSdialog = disconnectReconnectDialog.findViewById(R.id.textCheckMePOSdialog);
@@ -68,13 +67,14 @@ public class Dialogs extends MePOSAbstractActivity {
         mBtnGo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                completed.onCompleteDialogs(attempts);
                 disconnectReconnectDialog.dismiss();
             }
         });
         disconnectReconnectDialog.show();
     }
 
-    public void ContactSupport() {
+    public void ContactSupport(final boolean attempts) {
         contactSupportDialog = new Dialog(context);
         contactSupportDialog.setContentView(R.layout.dialog_contact_support);
         TextView mTextCheckMePOSdialog = contactSupportDialog.findViewById(R.id.textContactSupport);
@@ -85,13 +85,14 @@ public class Dialogs extends MePOSAbstractActivity {
         mBtnGo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                completed.onCompleteDialogs(attempts);
                 contactSupportDialog.dismiss();
             }
         });
         contactSupportDialog.show();
     }
 
-    public void WifiConfirmAdvanced(final TableLayout mAdvacedTable, final Switch mAdvacedSwitch) {
+    public void WifiConfirmAdvanced(final TableLayout mAdvacedTable, final Switch mAdvacedSwitch, final TextView mTxtSSIDWiFi) {
         wifiConfirmAdvancedDialog = new Dialog(context);
         wifiConfirmAdvancedDialog.setContentView(R.layout.dialog_wifi_confirm_advanced);
         TextView mTextCheckMePOSdialog = wifiConfirmAdvancedDialog.findViewById(R.id.textCheckMePOSdialog);
@@ -105,6 +106,8 @@ public class Dialogs extends MePOSAbstractActivity {
             @Override
             public void onClick(View view) {
                 mAdvacedTable.setVisibility(View.VISIBLE);
+                mTxtSSIDWiFi.setText("");
+                mTxtSSIDWiFi.setEnabled(true);
                 wifiConfirmAdvancedDialog.dismiss();
             }
         });
@@ -130,6 +133,7 @@ public class Dialogs extends MePOSAbstractActivity {
         mTextCheckMePOSdialog.setTypeface(typefaceAvenirLight);
         mTextCheckMePOSdialog.setText(R.string.field_required);
         mButtonContinue.setTypeface(typefaceAvenirLight);
+        mButtonCancel.setTypeface(typefaceAvenirLight);
         mButtonCancel.setVisibility(View.GONE);
         notNullFieldsDialog.setCancelable(false);
         params.width = 500;
@@ -146,7 +150,7 @@ public class Dialogs extends MePOSAbstractActivity {
     }
 
 
-    public void RetryCommonDialog(String title, String button, final int attempts) {
+    public void RetryCommonDialog(String title, String button, final boolean attempts) {
         retryCommonDialog = new Dialog(context);
         retryCommonDialog.setContentView(R.layout.dialog_retry_common);
         TextView mTextTitle = retryCommonDialog.findViewById(R.id.textTitle);
@@ -159,11 +163,26 @@ public class Dialogs extends MePOSAbstractActivity {
         mBtnAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                completed.onCompleteDialogs(attempts);
+                retryCommonDialog.dismiss();
+            }
+        });
+        retryCommonDialog.show();
+    }
 
-                if (attempts==4){
-                    completed.onComplete(true);
-                }
-
+    public void PlugAndUnplugTablet(String title, String button) {
+        retryCommonDialog = new Dialog(context);
+        retryCommonDialog.setContentView(R.layout.dialog_retry_common);
+        TextView mTextTitle = retryCommonDialog.findViewById(R.id.textTitle);
+        Button mBtnAction = retryCommonDialog.findViewById(R.id.btnAction);
+        mTextTitle.setText(title);
+        mBtnAction.setText(button);
+        mTextTitle.setTypeface(typefaceAvenirLight);
+        mBtnAction.setTypeface(typefaceAvenirLight);
+        retryCommonDialog.setCancelable(false);
+        mBtnAction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 retryCommonDialog.dismiss();
             }
         });

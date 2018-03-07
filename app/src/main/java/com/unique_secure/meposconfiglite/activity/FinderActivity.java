@@ -1,11 +1,9 @@
 package com.unique_secure.meposconfiglite.activity;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.ObjectAnimator;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.BatteryManager;
@@ -13,7 +11,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,25 +18,28 @@ import com.unique_secure.meposconfiglite.MePOSAbstractActivity;
 import com.unique_secure.meposconfiglite.R;
 import com.unique_secure.meposconfiglite.dialogs.Dialogs;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class FinderActivity extends MePOSAbstractActivity implements Dialogs.OnDialogCompleted {
 
     @BindView(R.id.lblLetsConfigure) TextView mLblLetsConfigure;
-    @BindView(R.id.imgProgressCircle) ImageView lblImgProgressCircle;
-    ObjectAnimator anim;
     Intent batteryStatus;
     IntentFilter ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
     Dialogs dialogs;
+    Dialogs finderInterface;
     int attempts = 0;
     private Dialog finalDialog;
+    private Dialog finderDialog;
 
 
     @Override
     protected void onResume() {
         super.onResume();
-        AnimateCircle();
+        FinderDialog();
     }
 
     @Override
@@ -50,27 +50,21 @@ public class FinderActivity extends MePOSAbstractActivity implements Dialogs.OnD
         mLblLetsConfigure.setTypeface(typefaceAvenirBold);
         batteryStatus = this.registerReceiver(null, ifilter);
         dialogs = new Dialogs(FinderActivity.this, FinderActivity.this);
-
-
-        lblImgProgressCircle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AnimateCircle();
-            }
-        });
+        finderInterface = new Dialogs(finderInterface);
     }
 
-    private void AnimateCircle() {
-        lblImgProgressCircle.setClickable(false);
-        anim = ObjectAnimator.ofFloat(lblImgProgressCircle, "Rotation", 0f, -360f);
-        anim.setDuration(5000);
-        anim.start();
 
-        anim.addListener(new AnimatorListenerAdapter() {
+    public void FinderDialog() {
+        finderDialog = new Dialog(this, R.style.printingDialogStyle);
+        finderDialog.setContentView(R.layout.dialog_common_printing);
+        TextView mTitle = finderDialog.findViewById(R.id.progress_dialog_title);
+        TextView mMessage = finderDialog.findViewById(R.id.progress_dialog_message);
+        mTitle.setText(R.string.searching);
+        mTitle.setTypeface(typefaceAntonioBold);
+        mMessage.setTypeface(typefaceAvenirLight);
+        finderDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                lblImgProgressCircle.setClickable(true);
+            public void onDismiss(DialogInterface dialogInterface) {
                 if (isMePOSConnected()) {
                     startActivity(new Intent(FinderActivity.this, ConfigureWiFiActivity.class));
                     overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
@@ -79,7 +73,25 @@ public class FinderActivity extends MePOSAbstractActivity implements Dialogs.OnD
                 }
             }
         });
+
+        finderDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                final Timer timer2 = new Timer();
+                timer2.schedule(new TimerTask() {
+                    public void run() {
+                        finderDialog.dismiss();
+                        timer2.cancel();
+                    }
+                }, 2000);
+            }
+        });
+
+        finderDialog.show();
+
+
     }
+
 
 
     private void loadBatterySection() {
@@ -103,25 +115,24 @@ public class FinderActivity extends MePOSAbstractActivity implements Dialogs.OnD
         if (present) {
             int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
             if (status == BatteryManager.BATTERY_STATUS_CHARGING) {
-                Toast.makeText(FinderActivity.this, "Unplug and plug the Tablet", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FinderActivity.this, getString(R.string.unplug_plug_txt), Toast.LENGTH_SHORT).show();
 
             } else {
                 switch (attempts) {
                     case 0:
                         attempts += 1;
-                        dialogs.RetryCommonDialog(getString(R.string.checkPower), getString(R.string.retry), attempts);
+                        dialogs.CheckTheMePOSDialog(false);
                         break;
                     case 1:
                         attempts += 1;
-                        dialogs.RetryCommonDialog(getString(R.string.reconectMePOS), getString(R.string.retry), attempts);
+                        dialogs.RetryCommonDialog(getString(R.string.reconectMePOS), getString(R.string.retry), false);
                         break;
                     case 2:
                         attempts += 1;
-                        dialogs.RetryCommonDialog(getString(R.string.cyclepowerMePOS), getString(R.string.retry), attempts);
+                        dialogs.RetryCommonDialog(getString(R.string.cyclepowerMePOS), getString(R.string.retry), false);
                         break;
                     case 3:
-                        attempts += 1;
-                        dialogs.RetryCommonDialog(getString(R.string.contactSupportTeam), getString(R.string.contact), attempts);
+                        dialogs.ContactSupport(true);
                         break;
                 }
             }
@@ -160,15 +171,23 @@ public class FinderActivity extends MePOSAbstractActivity implements Dialogs.OnD
             @Override
             public void onClick(View view) {
                 finalDialog.dismiss();
-                lblImgProgressCircle.setClickable(false);
+                //lblImgProgressCircle.setClickable(false);
             }
         });
 
         finalDialog.show();
     }
 
+
     @Override
-    public void onComplete(Boolean success) {
-        FinalDialog();
+    public void onCompleteDialogs(Boolean success) {
+        if (success) {
+            FinalDialog();
+        } else {
+            FinderDialog();
+        }
+
     }
+
+
 }

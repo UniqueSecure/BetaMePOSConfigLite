@@ -12,12 +12,12 @@ public class TestSharedPreferences {
     }
 
     public String getTestInfo(String savedfield) {
-        SharedPreferences information = context.getSharedPreferences(MY_PREFS_NAME, context.MODE_PRIVATE);
+        SharedPreferences information = context.getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE);
         String back = information.getString(savedfield, null);
         return back;
     }
     public void saveTestInfo(String mField, String mValue) {
-        SharedPreferences.Editor editor = context.getSharedPreferences(MY_PREFS_NAME, context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = context.getSharedPreferences(MY_PREFS_NAME, Context.MODE_PRIVATE).edit();
         editor.putString(mField, mValue);
         editor.apply();
     }

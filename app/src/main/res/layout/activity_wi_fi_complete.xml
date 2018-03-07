@@ -45,6 +45,21 @@
             android:id="@+id/ipFoundTxtComplete"
             style="@style/subTxtBlack"
             android:text="@string/netmask" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/space30" />
+
+        <Button
+            android:id="@+id/btnPrint"
+            android:layout_width="@dimen/button_width200"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorAccent"
+            android:text="@string/print"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/text_size35"
+            android:textAllCaps="true"
+            android:visibility="visible" />
     </LinearLayout>
 
     <LinearLayout

@@ -6,25 +6,23 @@ import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.DecelerateInterpolator;
-import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.unique_secure.meposconfiglite.MePOSAbstractActivity;
 import com.unique_secure.meposconfiglite.R;
-import com.unique_secure.meposconfiglite.persistence.MePOSSingleton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class WelcomeActivity extends MePOSAbstractActivity {
     @BindView(R.id.lblHello) TextView mLblHello;
-    @BindView(R.id.lblSubTitle) TextView mLblTap;
+    @BindView(R.id.lblSubTitle) TextView mLblSubtitle;
     @BindView(R.id.btnconnect) Button mBtnConnect;
     @BindView(R.id.img_circle) ImageView imgCircle;
+    @BindView(R.id.linear_welcome) LinearLayout mLinearWelcome;
 
 
     @Override
@@ -33,14 +31,28 @@ public class WelcomeActivity extends MePOSAbstractActivity {
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
         if (isMePOSConnected()) {
+            mLblHello.setText(getString(R.string.mepos_found));
+            mLblHello.setTextColor(getResources().getColor(R.color.white));
+            mLblSubtitle.setText(getString(R.string.mepos_found_lbl));
+            mLblSubtitle.setTextColor(getResources().getColor(R.color.white));
             mBtnConnect.setText(getString(R.string.connect));
-            mLblTap.setText(getString(R.string.mepos_found_lbl));
+            mBtnConnect.setTextColor(getResources().getColor(R.color.colorAccent));
+            mBtnConnect.setBackground(getResources().getDrawable(R.drawable.ic_brightness_1_white_24dp));
+            mLinearWelcome.setBackground(getResources().getDrawable(R.drawable.meposconfig8));
+            imgCircle.setBackground(getResources().getDrawable(R.drawable.ic_spininng_circle));
         } else {
+            mLblHello.setText(getString(R.string.hello));
+            mLblHello.setTextColor(getResources().getColor(R.color.black));
+            mLblSubtitle.setText(getString(R.string.tap_to_connect));
+            mLblSubtitle.setTextColor(getResources().getColor(R.color.black));
             mBtnConnect.setText(getString(R.string.next));
-            mLblTap.setText(getString(R.string.fmepos_not_found_lbl));
+            mBtnConnect.setTextColor(getResources().getColor(R.color.white));
+            mBtnConnect.setBackground(getResources().getDrawable(R.drawable.ic_brightness_1_black_24dp));
+            mLinearWelcome.setBackground(getResources().getDrawable(R.drawable.meposconfig5));
+            imgCircle.setBackground(getResources().getDrawable(R.drawable.ic_spininng_circle_accent));
         }
     }
 
@@ -51,7 +63,7 @@ public class WelcomeActivity extends MePOSAbstractActivity {
         setContentView(R.layout.activity_welcome);
         ButterKnife.bind(this);
         mLblHello.setTypeface(typefaceAntonioBold);
-        mLblTap.setTypeface(typefaceAvenirLight);
+        mLblSubtitle.setTypeface(typefaceAvenirLight);
         mBtnConnect.setTypeface(typefaceAvenirLight);
         findMePOSUSB();
 

@@ -7,6 +7,9 @@
     <supports-screens android:largeScreens="true" />
     <supports-screens android:anyDensity="true" />
 
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-feature android:name="android.hardware.usb.host" />
 
     <application
@@ -41,12 +44,6 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".activity.FinderActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="sensorLandscape"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="stateAlwaysHidden" />
-        <activity
-            android:name=".activity.MeposFoundActivity"
             android:launchMode="singleTask"
             android:screenOrientation="sensorLandscape"
             android:theme="@style/AppTheme.NoActionBar"

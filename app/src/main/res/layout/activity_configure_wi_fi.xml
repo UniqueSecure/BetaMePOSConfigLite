@@ -13,38 +13,87 @@
         android:gravity="center_vertical|center_horizontal"
         android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/lblLetsConfigure"
-        style="@style/setUpTitlesBlack"
-        android:gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size100"
-        android:text="@string/configure_your"/>
+        <TextView
+            android:id="@+id/lblLetsConfigure"
+            style="@style/setUpTitlesBlack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/configure_your"
+            android:textSize="@dimen/text_size60" />
 
-    <TextView
-        android:id="@+id/lblWiFi"
-        android:gravity="center"
-        android:textColor="@android:color/black"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size100"
-        android:text="@string/wifi"/>
+        <TextView
+            android:id="@+id/lblWiFi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/wifi"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size60" />
 
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/space20" />
+        <TextView
+            android:id="@+id/lblMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/howtext"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="@dimen/text_size20" />
 
-    <Button
-        android:id="@+id/btngo"
-        android:layout_width="@dimen/button_width150"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorAccent"
-        android:text="@string/go"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/text_size25"
-        android:textAllCaps="true"
-        android:visibility="visible" />
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/space20" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/btnWiFi"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:background="@drawable/ic_wifi" />
+
+                <TextView
+                    android:id="@+id/txtByWiFi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="By WiFi"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/text_size20" />
+            </LinearLayout>
+            <Space
+                android:layout_width="@dimen/space35"
+                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/btnEthernet"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:background="@drawable/ic_ethernet" />
+
+                <TextView
+                    android:id="@+id/txtByEthernet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="By Ethernet"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/text_size20" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -60,8 +109,8 @@
         <Button
             android:id="@+id/buttonNextWiFi"
             style="@style/nextBtns"
-            android:visibility="invisible"
-            android:text="@string/next"/>
+            android:text="@string/next"
+            android:visibility="invisible" />
     </LinearLayout>
 
 </LinearLayout>

@@ -42,14 +42,14 @@ public class MePOSAbstractActivity extends AppCompatActivity {
         typefaceAntonioRegular = Typeface.createFromAsset(getAssets(), "fonts/antonio-regular.ttf");
         typefaceAvenirMedium = Typeface.createFromAsset(getAssets(), "fonts/avenirltstd.medium.otf");
         usbDeviceHelper = new UsbDeviceHelper(this);
-        requestUsbPermissionMePOS();
+
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        checkMePOSPresentViaUSB();
+        //checkMePOSPresentViaUSB();
     }
 
 
@@ -75,8 +75,12 @@ public class MePOSAbstractActivity extends AppCompatActivity {
 
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                MePOSSingleton.createInstance(getApplicationContext(), MePOSConnectionType.USB);
-                dialog.dismiss();
+               try {
+                   MePOSSingleton.createInstance(getApplicationContext(), MePOSConnectionType.USB);
+                   dialog.dismiss();
+               }catch (Exception e){
+                   dialog.dismiss();
+               }
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {

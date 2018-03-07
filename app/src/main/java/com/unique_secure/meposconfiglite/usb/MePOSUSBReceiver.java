@@ -16,15 +16,20 @@ import com.uniquesecure.meposconnect.MePOSConnectionType;
 
 public class MePOSUSBReceiver extends BroadcastReceiver {
 
+
     @Override
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
         UsbDevice device = intent.getParcelableExtra(UsbManager.EXTRA_DEVICE);
 
+        Intent broadcastIntent = new Intent();
+        broadcastIntent.setAction("EnableDisableAction");
+
         if (UsbManager.ACTION_USB_DEVICE_ATTACHED.equals(action)) {
             if (isAMePOS(device)) {
                 MePOSSingleton.createInstance(context.getApplicationContext(), MePOSConnectionType.USB);
                 Toast.makeText(context, context.getString(R.string.mepos_connected), Toast.LENGTH_SHORT).show();
+                broadcastIntent.putExtra("enableordisable", true);
                 MePOSSingleton.lastStateUsbAttached = true;
             } else if (isFTDI(device)) {
                 MePOSSingleton.lastStateFTDI = true;
@@ -33,6 +38,7 @@ public class MePOSUSBReceiver extends BroadcastReceiver {
             if (isAMePOS(device)) {
                 try {
                     Toast.makeText(context, context.getString(R.string.mepos_disconnected), Toast.LENGTH_SHORT).show();
+                    broadcastIntent.putExtra("enableordisable", false);
                     MePOSSingleton.lastStateUsbAttached = false;
                 } catch (Exception e) {
                     Log.e(context.getString(R.string.usb), e.getMessage());
@@ -41,6 +47,7 @@ public class MePOSUSBReceiver extends BroadcastReceiver {
                 MePOSSingleton.lastStateFTDI = false;
             }
         }
+        context.sendBroadcast(broadcastIntent);
     }
 
     protected boolean isAMePOS(UsbDevice device) {

@@ -29,20 +29,22 @@
             android:id="@+id/btnContinue"
             android:layout_width="@dimen/button_width100"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_border"
-            android:backgroundTint="@android:color/white"
+            android:background="@drawable/my_button_bg"
             android:text="@string/continue_btn"
             android:textAllCaps="true"
             android:textColor="@color/colorCosmeticBlue"
             android:textSize="@dimen/text_size20"
             android:visibility="visible" />
 
+        <android.support.v4.widget.Space
+            android:layout_width="@dimen/space25"
+            android:layout_height="wrap_content" />
+
         <Button
             android:id="@+id/btnCancel"
             android:layout_width="@dimen/button_width100"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_border"
-            android:backgroundTint="@android:color/white"
+            android:background="@drawable/my_button_bg"
             android:text="@string/cancel_btn"
             android:textAllCaps="true"
             android:textColor="@color/colorCosmeticBlue"

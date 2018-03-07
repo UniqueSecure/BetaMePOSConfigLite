@@ -72,9 +72,8 @@ public class NetworkConfigAsync extends AsyncTask<NetworkConfiguration, NetworkC
             case ETHERNET_CLIENT:
                 result = manager.MePOSConnectEthernet(this);
                 try {
-                    String wifiipaddress = testSharedPreferences.getTestInfo("IPSaved");
                     testSharedPreferences.saveTestInfo("wifipassword", context.getString(R.string.not_aviliable));
-                    testSharedPreferences.saveTestInfo("wifiipaddress", wifiipaddress);
+                    testSharedPreferences.saveTestInfo("wifiipaddress", manager.MePOSGetAssignedIP());
                 } catch (Exception e) {
                     Log.e(TAG, e.toString());
                 }
