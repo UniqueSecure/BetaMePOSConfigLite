@@ -3,7 +3,10 @@ package com.unique_secure.meposconfiglite.activity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.unique_secure.meposconfiglite.BuildConfig;
 import com.unique_secure.meposconfiglite.MePOSAbstractActivity;
 import com.unique_secure.meposconfiglite.R;
 
@@ -23,6 +27,23 @@ public class WelcomeActivity extends MePOSAbstractActivity {
     @BindView(R.id.btnconnect) Button mBtnConnect;
     @BindView(R.id.img_circle) ImageView imgCircle;
     @BindView(R.id.linear_welcome) LinearLayout mLinearWelcome;
+    @BindView(R.id.versionName) TextView mVersionName;
+    private IntentFilter intfilt;
+    private boolean enableOrDisable = false;
+
+
+    BroadcastReceiver enableDisableBrodcastRecr = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            enableOrDisable = intent.getExtras().getBoolean("enableordisable");
+            if (enableOrDisable) {
+               SetToConnected();
+            } else {
+                SetToDisconnected();
+            }
+
+        }
+    };
 
 
     @Override
@@ -33,27 +54,31 @@ public class WelcomeActivity extends MePOSAbstractActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (isMePOSConnected()) {
-            mLblHello.setText(getString(R.string.mepos_found));
-            mLblHello.setTextColor(getResources().getColor(R.color.white));
-            mLblSubtitle.setText(getString(R.string.mepos_found_lbl));
-            mLblSubtitle.setTextColor(getResources().getColor(R.color.white));
-            mBtnConnect.setText(getString(R.string.connect));
-            mBtnConnect.setTextColor(getResources().getColor(R.color.colorAccent));
-            mBtnConnect.setBackground(getResources().getDrawable(R.drawable.ic_brightness_1_white_24dp));
-            mLinearWelcome.setBackground(getResources().getDrawable(R.drawable.meposconfig8));
-            imgCircle.setBackground(getResources().getDrawable(R.drawable.ic_spininng_circle));
-        } else {
-            mLblHello.setText(getString(R.string.hello));
-            mLblHello.setTextColor(getResources().getColor(R.color.black));
-            mLblSubtitle.setText(getString(R.string.tap_to_connect));
-            mLblSubtitle.setTextColor(getResources().getColor(R.color.black));
-            mBtnConnect.setText(getString(R.string.next));
-            mBtnConnect.setTextColor(getResources().getColor(R.color.white));
-            mBtnConnect.setBackground(getResources().getDrawable(R.drawable.ic_brightness_1_black_24dp));
-            mLinearWelcome.setBackground(getResources().getDrawable(R.drawable.meposconfig5));
-            imgCircle.setBackground(getResources().getDrawable(R.drawable.ic_spininng_circle_accent));
-        }
+        registerReceiver(enableDisableBrodcastRecr, intfilt);
+    }
+
+    private void SetToConnected(){
+        mLblHello.setText(getString(R.string.mepos_found));
+        mLblHello.setTextColor(getResources().getColor(R.color.white));
+        mLblSubtitle.setText(getString(R.string.mepos_found_lbl));
+        mLblSubtitle.setTextColor(getResources().getColor(R.color.white));
+        mBtnConnect.setText(getString(R.string.connect));
+        mBtnConnect.setTextColor(getResources().getColor(R.color.colorAccent));
+        mBtnConnect.setBackground(getResources().getDrawable(R.drawable.ic_brightness_1_white_24dp));
+        mLinearWelcome.setBackground(getResources().getDrawable(R.drawable.meposconfig8));
+        imgCircle.setBackground(getResources().getDrawable(R.drawable.ic_spininng_circle));
+    }
+
+    private void SetToDisconnected(){
+        mLblHello.setText(getString(R.string.hello));
+        mLblHello.setTextColor(getResources().getColor(R.color.black));
+        mLblSubtitle.setText(getString(R.string.tap_to_connect));
+        mLblSubtitle.setTextColor(getResources().getColor(R.color.black));
+        mBtnConnect.setText(getString(R.string.next));
+        mBtnConnect.setTextColor(getResources().getColor(R.color.white));
+        mBtnConnect.setBackground(getResources().getDrawable(R.drawable.ic_brightness_1_black_24dp));
+        mLinearWelcome.setBackground(getResources().getDrawable(R.drawable.meposconfig5));
+        imgCircle.setBackground(getResources().getDrawable(R.drawable.ic_spininng_circle_accent));
     }
 
 
@@ -65,7 +90,18 @@ public class WelcomeActivity extends MePOSAbstractActivity {
         mLblHello.setTypeface(typefaceAntonioBold);
         mLblSubtitle.setTypeface(typefaceAvenirLight);
         mBtnConnect.setTypeface(typefaceAvenirLight);
+        mVersionName.setTypeface(typefaceAvenirLight);
         findMePOSUSB();
+
+
+        if(CheckMePOSPermissions()){
+            SetToConnected();
+        } else{
+            SetToDisconnected();
+        }
+
+        intfilt = new IntentFilter();
+        intfilt.addAction("EnableDisableAction");
 
         mBtnConnect.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +110,8 @@ public class WelcomeActivity extends MePOSAbstractActivity {
                 RotateCircle();
             }
         });
+
+        mVersionName.setText(getString(R.string.version_txt, BuildConfig.VERSION_NAME));
     }
 
     private void RotateCircle() {

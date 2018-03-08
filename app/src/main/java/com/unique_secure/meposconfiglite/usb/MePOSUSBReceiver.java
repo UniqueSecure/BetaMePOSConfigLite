@@ -27,10 +27,14 @@ public class MePOSUSBReceiver extends BroadcastReceiver {
 
         if (UsbManager.ACTION_USB_DEVICE_ATTACHED.equals(action)) {
             if (isAMePOS(device)) {
-                MePOSSingleton.createInstance(context.getApplicationContext(), MePOSConnectionType.USB);
-                Toast.makeText(context, context.getString(R.string.mepos_connected), Toast.LENGTH_SHORT).show();
-                broadcastIntent.putExtra("enableordisable", true);
-                MePOSSingleton.lastStateUsbAttached = true;
+                try {
+                    MePOSSingleton.createInstance(context.getApplicationContext(), MePOSConnectionType.USB);
+                    Toast.makeText(context, context.getString(R.string.mepos_connected), Toast.LENGTH_SHORT).show();
+                    broadcastIntent.putExtra("enableordisable", true);
+                    MePOSSingleton.lastStateUsbAttached = true;
+                } catch (Exception e) {
+                    Log.e(context.getString(R.string.usb), e.getMessage());
+                }
             } else if (isFTDI(device)) {
                 MePOSSingleton.lastStateFTDI = true;
             }

@@ -24,7 +24,8 @@ import com.unique_secure.meposconfiglite.persistence.MePOSSingleton;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ConfigureWiFiActivity extends MePOSAbstractActivity implements NetworkConfigAsync.OnNetworkConfigCompleted {
+public class ConfigureWiFiActivity extends MePOSAbstractActivity implements NetworkConfigAsync.OnNetworkConfigCompleted,
+Dialogs.OnDialogCompleted{
 
     @BindView(R.id.lblLetsConfigure) TextView mLblLetsConfigure;
     @BindView(R.id.lblWiFi) TextView mLblWiFi;
@@ -38,7 +39,7 @@ public class ConfigureWiFiActivity extends MePOSAbstractActivity implements Netw
     NetworkConfiguration networkConfig = new NetworkConfiguration();
 
     private IntentFilter intfilt;
-    private boolean enableOrDisable = false;
+    private boolean enableOrDisable = true;
     Dialogs dialogs;
 
 
@@ -71,7 +72,7 @@ public class ConfigureWiFiActivity extends MePOSAbstractActivity implements Netw
                     startActivity(new Intent(ConfigureWiFiActivity.this, WifiConfirm.class)); //next
                     overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left);
                 } else {
-                    dialogs.PlugAndUnplugTablet(getString(R.string.unplug_plug_txt), getString(R.string.ok));
+                    dialogs.TroubleDialog(getResources().getString(R.string.dialog_cdisconect_reconect), false);
                 }
             }
         });
@@ -80,24 +81,8 @@ public class ConfigureWiFiActivity extends MePOSAbstractActivity implements Netw
             @Override
             public void onClick(View view) {
                 if (enableOrDisable) {
-                    final AlertDialog alertDialog = new AlertDialog.Builder(ConfigureWiFiActivity.this).create();
-                    alertDialog.setTitle(R.string.dialogwifi_modes_alerttitle);
-                    alertDialog.setCancelable(false);
-                    alertDialog.setMessage(getString(R.string.wificonfirmmsg));
-                    alertDialog.setButton(Dialog.BUTTON_POSITIVE, getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            networkConfig.setMode(ConfigurationNetModes.ETHERNET_CLIENT);
-                            new NetworkConfigAsync(ConfigureWiFiActivity.this, MePOSSingleton.getInstance(), ConfigureWiFiActivity.this).execute(networkConfig);
-                        }
-                    });
-                    alertDialog.setButton(Dialog.BUTTON_NEGATIVE, getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            alertDialog.dismiss();
-                        }
-                    });
-                    alertDialog.show();
+                    networkConfig.setMode(ConfigurationNetModes.ETHERNET_CLIENT);
+                    new NetworkConfigAsync(ConfigureWiFiActivity.this, MePOSSingleton.getInstance(), ConfigureWiFiActivity.this).execute(networkConfig);
                 } else {
                     dialogs.PlugAndUnplugTablet(getString(R.string.unplug_plug_txt), getString(R.string.ok));
                 }
@@ -116,8 +101,7 @@ public class ConfigureWiFiActivity extends MePOSAbstractActivity implements Netw
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configure_wi_fi);
         ButterKnife.bind(this);
-        dialogs = new Dialogs(ConfigureWiFiActivity.this);
-
+        dialogs = new Dialogs(ConfigureWiFiActivity.this, ConfigureWiFiActivity.this);
 
         mLblLetsConfigure.setTypeface(typefaceAntonioRegular);
         mLblWiFi.setTypeface(typefaceAntonioBold);
@@ -146,5 +130,10 @@ public class ConfigureWiFiActivity extends MePOSAbstractActivity implements Netw
     public void onComplete(Boolean success) {
         startActivity(new Intent(ConfigureWiFiActivity.this, WiFiComplete.class));
         overridePendingTransition(R.anim.anim_slide_in_left, R.anim.anim_slide_out_left); //next
+    }
+
+    @Override
+    public void onCompleteDialogs(Boolean success) {
+
     }
 }

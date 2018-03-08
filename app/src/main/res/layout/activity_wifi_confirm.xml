@@ -73,6 +73,28 @@
                         android:singleLine="true" />
                 </TableRow>
 
+            </TableLayout>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="5dp" />
+
+            <Switch
+                android:id="@+id/advacedswitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="24dp"
+                android:text="@string/advacedswitchtxt"
+                android:textAllCaps="false"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+
+            <TableLayout
+                android:id="@+id/advacedTable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
                 <Space android:layout_height="5dp" />
 
                 <TableRow android:gravity="center_horizontal">
@@ -97,28 +119,6 @@
                         android:theme="@style/Spinner" />
 
                 </TableRow>
-
-            </TableLayout>
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="5dp" />
-
-            <Switch
-                android:id="@+id/advacedswitch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="24dp"
-                android:text="@string/advacedswitchtxt"
-                android:textAllCaps="false"
-                android:textColor="@android:color/black"
-                android:textSize="20sp" />
-
-            <TableLayout
-                android:id="@+id/advacedTable"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone">
 
                 <Space android:layout_height="5dp" />
 

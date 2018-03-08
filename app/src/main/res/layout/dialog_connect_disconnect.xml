@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/imageDialogLayout"
+    android:layout_width="550dp"
+    android:layout_height="500dp"
+    android:layout_gravity="center_vertical|center_horizontal"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/printdialogtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:gravity="start"
+        android:textSize="@dimen/text_size20"/>
+
+    <ImageView
+        android:id="@+id/printDialogImage"
+        style="@style/troubledialog" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:paddingRight="@dimen/space35"
+        android:background="@android:color/transparent"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/buttonyesprint"
+            android:layout_width="@dimen/button_width100"
+            android:layout_height="wrap_content"
+            android:background="@drawable/my_button_bg"
+            android:textAllCaps="true"
+            android:textColor="@color/colorCosmeticBlue"
+            android:textSize="@dimen/text_size20"
+            android:text="@string/next" />
+    </LinearLayout>
+</LinearLayout>

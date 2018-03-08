@@ -7,53 +7,71 @@
     android:gravity="center_vertical|center_horizontal"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/lblHello"
-        style="@style/setUpTitlesWhite"
-        android:gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
-        android:textSize="@dimen/text_size60"
-        android:text="@string/hello"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/lblSubTitle"
-        android:gravity="center"
-        android:textColor="@android:color/white"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size20"
-        android:text="@string/tap_to_connect"/>
+        <TextView
+            android:id="@+id/lblHello"
+            style="@style/setUpTitlesWhite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:text="@string/hello"
+            android:textSize="@dimen/text_size60" />
 
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/space20" />
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/img_circle"
-            android:layout_centerInParent="true"
-            android:layout_width="350dp"
-            android:layout_height="350dp"
-            android:src="@drawable/ic_spininng_circle" />
-
-        <Button
-            android:id="@+id/btnconnect"
-            android:layout_centerInParent="true"
-            android:layout_width="135dp"
-            android:layout_height="135dp"
-            android:background="@drawable/ic_brightness_1_black_24dp"
-            android:text="@string/next"
-            android:textColor="@color/colorAccent"
+        <TextView
+            android:id="@+id/lblSubTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/tap_to_connect"
+            android:textColor="@android:color/white"
             android:textSize="@dimen/text_size20" />
 
-    </RelativeLayout>
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/space20" />
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
+            <ImageView
+                android:id="@+id/img_circle"
+                android:layout_width="350dp"
+                android:layout_height="350dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_spininng_circle" />
+
+            <Button
+                android:id="@+id/btnconnect"
+                android:layout_width="135dp"
+                android:layout_height="135dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ic_brightness_1_black_24dp"
+                android:text="@string/next"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/text_size20" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/versionName"
+            style="@style/versionTxt"
+            android:text="@string/version_txt"/>
+    </LinearLayout>
 
 
 </LinearLayout>

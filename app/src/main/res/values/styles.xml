@@ -61,6 +61,18 @@
         <item name="android:gravity">end</item>
     </style>
 
+    <style name="versionTxt">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@null</item>
+        <item name="android:textSize">@dimen/text_size20</item>
+        <item name="android:textColor">@color/gray700</item>
+        <item name="android:paddingBottom">@dimen/padding10</item>
+        <item name="android:paddingEnd">@dimen/padding30</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">end</item>
+    </style>
+
     <style name="subTxt">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -132,5 +144,20 @@
         <item name="android:textSize">@dimen/text_size15</item>
     </style>
 
+    <style name="bigIconParameters">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:background">@null</item>
+    </style>
+
+
+    <style name="troubledialog" parent="bigIconParameters">
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@null</item>
+        <item name="android:layout_width">450dp</item>
+        <item name="android:layout_height">300dp</item>
+    </style>
 
 </resources>

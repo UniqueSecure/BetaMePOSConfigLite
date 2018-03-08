@@ -1,11 +1,13 @@
 package com.unique_secure.meposconfiglite.dialogs;
 
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TableLayout;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 
 import com.unique_secure.meposconfiglite.MePOSAbstractActivity;
 import com.unique_secure.meposconfiglite.R;
+import com.unique_secure.meposconfiglite.persistence.ConfigureImage;
 
 public class Dialogs extends MePOSAbstractActivity {
 
@@ -21,6 +24,7 @@ public class Dialogs extends MePOSAbstractActivity {
     }
 
     Context context;
+    ConfigureImage image;
     private Dialog checkMePOSDialog,
             disconnectReconnectDialog,
             contactSupportDialog,
@@ -38,12 +42,13 @@ public class Dialogs extends MePOSAbstractActivity {
         this.context = context;
     }
 
-    public void CheckTheMePOSDialog(final boolean attempts) {
+    public void CheckTheMePOSDialog(String title, final boolean attempts) {
         checkMePOSDialog = new Dialog(context);
         checkMePOSDialog.setContentView(R.layout.dialog_check_the_mepos);
         TextView mTextCheckMePOSdialog = checkMePOSDialog.findViewById(R.id.textCheckMePOSdialog);
         Button mBtnGo = checkMePOSDialog.findViewById(R.id.btngo);
         mTextCheckMePOSdialog.setTypeface(typefaceAvenirLight);
+        mTextCheckMePOSdialog.setText(title);
         mBtnGo.setTypeface(typefaceAvenirLight);
         checkMePOSDialog.setCancelable(false);
         mBtnGo.setOnClickListener(new View.OnClickListener() {
@@ -133,6 +138,7 @@ public class Dialogs extends MePOSAbstractActivity {
         mTextCheckMePOSdialog.setTypeface(typefaceAvenirLight);
         mTextCheckMePOSdialog.setText(R.string.field_required);
         mButtonContinue.setTypeface(typefaceAvenirLight);
+        mButtonContinue.setText(context.getString(R.string.ok));
         mButtonCancel.setTypeface(typefaceAvenirLight);
         mButtonCancel.setVisibility(View.GONE);
         notNullFieldsDialog.setCancelable(false);
@@ -189,4 +195,31 @@ public class Dialogs extends MePOSAbstractActivity {
         retryCommonDialog.show();
     }
 
+
+    public void TroubleDialog(String title, final boolean attempts) {
+        image = new ConfigureImage(context);
+        final Dialog printtestdialog = new Dialog(context);
+        printtestdialog.setContentView(R.layout.dialog_connect_disconnect);
+        printtestdialog.setTitle(title);
+        TextView mPrintdialogtext = printtestdialog.findViewById(R.id.printdialogtext);
+        ImageView mPrintDialogImage = printtestdialog.findViewById(R.id.printDialogImage);
+        Button mButtonyesprint = printtestdialog.findViewById(R.id.buttonyesprint);
+        mPrintdialogtext.setTypeface(typefaceAvenirLight);
+        mButtonyesprint.setTypeface(typefaceAvenirLight);
+        mPrintdialogtext.setText(title);
+        try {
+            int idImage = context.getResources().getIdentifier("raw/reconnect", null, context.getPackageName());
+            image.SetImage(idImage, mPrintDialogImage);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        mButtonyesprint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                printtestdialog.dismiss();
+                completed.onCompleteDialogs(attempts);
+            }
+        });
+        printtestdialog.show();
+    }
 }

@@ -40,6 +40,7 @@ public class FinderActivity extends MePOSAbstractActivity implements Dialogs.OnD
     protected void onResume() {
         super.onResume();
         FinderDialog();
+        attempts = 0;
     }
 
     @Override
@@ -93,7 +94,6 @@ public class FinderActivity extends MePOSAbstractActivity implements Dialogs.OnD
     }
 
 
-
     private void loadBatterySection() {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(Intent.ACTION_POWER_CONNECTED);
@@ -115,21 +115,32 @@ public class FinderActivity extends MePOSAbstractActivity implements Dialogs.OnD
         if (present) {
             int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
             if (status == BatteryManager.BATTERY_STATUS_CHARGING) {
-                Toast.makeText(FinderActivity.this, getString(R.string.unplug_plug_txt), Toast.LENGTH_SHORT).show();
-
+                switch (attempts) {
+                    case 0:
+                        attempts += 1;
+                        dialogs.TroubleDialog(getResources().getString(R.string.dialog_cdisconect_reconect), false);
+                        break;
+                    case 1:
+                        attempts += 1;
+                        dialogs.RetryCommonDialog(getString(R.string.cyclepowerMePOS), getString(R.string.next), false);
+                        break;
+                    case 2:
+                        dialogs.ContactSupport(true);
+                        break;
+                }
             } else {
                 switch (attempts) {
                     case 0:
                         attempts += 1;
-                        dialogs.CheckTheMePOSDialog(false);
+                        dialogs.CheckTheMePOSDialog(getResources().getString(R.string.dialog_check_mepos_text),false);
                         break;
                     case 1:
                         attempts += 1;
-                        dialogs.RetryCommonDialog(getString(R.string.reconectMePOS), getString(R.string.retry), false);
+                        dialogs.TroubleDialog(getResources().getString(R.string.dialog_cdisconect_reconect), false);
                         break;
                     case 2:
                         attempts += 1;
-                        dialogs.RetryCommonDialog(getString(R.string.cyclepowerMePOS), getString(R.string.retry), false);
+                        dialogs.CheckTheMePOSDialog(getResources().getString(R.string.unplug_power_source),false);
                         break;
                     case 3:
                         dialogs.ContactSupport(true);

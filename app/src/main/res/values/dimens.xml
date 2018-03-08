@@ -41,12 +41,16 @@
     <dimen name="padding40">40dp</dimen>
     <dimen name="padding50">50dp</dimen>
     <dimen name="dialog_with">550dp</dimen>
+    <dimen name="dialog_with600">600dp</dimen>
+    <dimen name="dialog_with650">650dp</dimen>
     <dimen name="dialog_with300">300dp</dimen>
     <dimen name="dialog_with350">350dp</dimen>
     <dimen name="dialog_with450">450dp</dimen>
+    <dimen name="dialog_with500">500dp</dimen>
     <dimen name="dialog_height">200dp</dimen>
     <dimen name="dialog_height300">300dp</dimen>
     <dimen name="dialog_height250">250dp</dimen>
+    <dimen name="dialog_height200">200dp</dimen>
     <dimen name="dialog_height150">150dp</dimen>
     <dimen name="dialog_height1200">200dp</dimen>
 

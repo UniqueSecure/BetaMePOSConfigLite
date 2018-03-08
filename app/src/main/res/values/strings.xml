@@ -9,7 +9,7 @@
     <string name="continue_btn">continue</string>
     <string name="cancel_btn">cancel</string>
     <string name="dialog_advanced_wifi">Only change these options if you have previous\nexperience on network configuration.</string>
-    <string name="field_required">The field is required!</string>
+    <string name="field_required">Please enter your WiFi password before continue.</string>
     <string name="not_aviliable">N/A</string>
     <string name="wifi_client_config_problem">It appears the Wifi client connection was not established. Please Check your encryption modes and password.</string>
     <string name="it_will_take_a_minute">It will take about one minute to configure, please wait.</string>
@@ -19,7 +19,7 @@
     <string name="checkPower">Check the MePOS power</string>
     <string name="reconectMePOS">Please try to reconnect MePOS</string>
     <string name="checkrouter">Please check that your router is on</string>
-    <string name="cyclepowerMePOS">Please unplug the power source and plug it back</string>
+    <string name="cyclepowerMePOS">Please cycle power the MePOS</string>
     <string name="contact">contact</string>
     <string name="meposConfiguration">Would you like to run\n MePOS configuration again?</string>
     <string name="yes">yes</string>
@@ -49,7 +49,7 @@
     <string name="retry">retry</string>
     <string name="finding_your_mepos">Finding your MePOS now,\nplease wait...</string>
     <string name="progress_circle">progress circle</string>
-    <string name="dialog_check_mepos_text">Check if your MePOS\nis connected to the main power,\nplease retry once connected</string>
+    <string name="dialog_check_mepos_text">Please check if the MePOS is connected to a power source, please retry once connected</string>
     <string name="dialog_cdisconect_reconect">Please disconnect and reconnect\nthe tablet then tap NEXT to continue</string>
     <string name="dialog_ccontact_support">We\'re sorry, we\'re having trouble finding your MePOS,\nPlease call 24/7 customer support on: 1-800-XXX-XXX</string>
     <string name="wifi_client_title">Tell us about\nyour WiFi network</string>
@@ -63,6 +63,9 @@
     <string name="automatic">Automatic</string>
     <string name="advacedswitchtxt">Advanced configuration</string>
     <string name="unplug_plug_txt">Unplug and plug the Tablet</string>
+    <string name="unplug_power_source">Please unplug the power source and plug it back in, then tap NEXT to continue</string>
+    <string name="version_txt">Version %s</string>
+
 
     <string-array name="encryptions">
         <item>NONE</item>
