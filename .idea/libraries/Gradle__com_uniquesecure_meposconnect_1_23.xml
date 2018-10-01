@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.uniquesecure:meposconnect-1.23">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/meposconnect-1.23.aar/c84fd3528a24afbe6de06b8cda2a96b4/jars/libs/usbserial-release.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/meposconnect-1.23.aar/c84fd3528a24afbe6de06b8cda2a96b4/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/meposconnect-1.23.aar/c84fd3528a24afbe6de06b8cda2a96b4/jars/libs/d2xx.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/meposconnect-1.23.aar/c84fd3528a24afbe6de06b8cda2a96b4/jars/libs/xmodem-1.0.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/meposconnect-1.23.aar/c84fd3528a24afbe6de06b8cda2a96b4/res" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
